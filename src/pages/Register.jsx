@@ -14,7 +14,6 @@ const Register = () => {
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const phoneRegex = /^[0-9]{10}$/;
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
         if (!emailRegex.test(email)) {
             alert("Invalid email format");
@@ -24,8 +23,8 @@ const Register = () => {
             alert("Phone number must be 10 digits");
             return;
         }
-        if (!passwordRegex.test(password)) {
-            alert("Password must be at least 8 characters long and include at least one letter and one number");
+        if (password.length < 8) {
+            setError("Password must be at least 8 characters long.");
             return;
         }
 

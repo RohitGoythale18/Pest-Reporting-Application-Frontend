@@ -23,12 +23,12 @@ function App() {
           if (response.data.valid) {
             setIsAuthenticated(true);
           } else {
-            localStorage.removeItem("token"); // Remove invalid token
+            localStorage.removeItem("token");
             setIsAuthenticated(false);
           }
         })
         .catch(() => {
-          localStorage.removeItem("token"); // Remove invalid token
+          localStorage.removeItem("token");
           setIsAuthenticated(false);
         });
     } else {

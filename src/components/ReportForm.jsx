@@ -6,9 +6,11 @@ const ReportForm = () => {
     const [pestType, setPestType] = useState("");
     const [description, setDescription] = useState("");
     const [image, setImage] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
         const token = localStorage.getItem("token");
         if (!token) {
@@ -47,6 +49,8 @@ const ReportForm = () => {
         } catch (error) {
             console.error("Error:", error.response?.data || error.message);
             alert(error.response?.data?.message || "Failed to submit report");
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -90,7 +94,8 @@ const ReportForm = () => {
                     type="submit"
                     className="bg-blue-500 text-white px-5 py-2 hover:bg-blue-700 rounded"
                 >
-                    Submit Report
+                    
+                    {isLoading ? "Submitting..." : "Submit Report"}
                 </button>
             </form>
         </div>

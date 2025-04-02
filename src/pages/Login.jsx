@@ -6,9 +6,11 @@ const Login = ({ setIsAuthenticated }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         try {
             const res = await axios.post("https://pest-reporting-application-backend.onrender.com/pest-report/login",
                 { email, password },
@@ -19,14 +21,15 @@ const Login = ({ setIsAuthenticated }) => {
                 localStorage.setItem("token", res.data.token);
                 localStorage.setItem("userId", res.data.user.id);
 
-                setIsAuthenticated(true); 
-
+                setIsAuthenticated(true);
                 navigate("/");
             } else {
                 throw new Error("Invalid response from server");
             }
         } catch (error) {
             alert("Invalid credentials");
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -51,14 +54,14 @@ const Login = ({ setIsAuthenticated }) => {
                     required
                 />
                 <button type="submit" className="bg-blue-500 text-white p-2 w-full">
-                    Login
+                    {isLoading ? "Signing In..." : "Sign In"}
                 </button>
             </form>
 
             <p className="mt-4 text-md text-gray-600 text-center">
                 Don't have an account?{" "}
                 <Link to="/register" className="text-blue-500 hover:underline">
-                    Register
+                    Sign Up
                 </Link>
             </p>
         </div>

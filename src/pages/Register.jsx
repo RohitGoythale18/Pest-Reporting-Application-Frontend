@@ -8,6 +8,7 @@ const Register = () => {
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -28,11 +29,15 @@ const Register = () => {
             return;
         }
 
+        setIsLoading(true);
+
         try {
             await axios.post("https://pest-reporting-application-backend.onrender.com/pest-report/register", { username, email, phone, password });
             navigate("/login");
         } catch (error) {
             alert("Registration failed");
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -76,11 +81,11 @@ const Register = () => {
                     type="submit"
                     className="bg-blue-500 text-white p-2 w-full"
                 >
-                    Register
+                    {isLoading ? "Signing Up..." : "Sign Up"}
                 </button>
             </form>
 
-            <p className="mt-4 text-md text-gray-600 text-center">Already have an account? <Link to="/login" className="text-blue-500 hover:underline">Login</Link></p>
+            <p className="mt-4 text-md text-gray-600 text-center">Already have an account? <Link to="/login" className="text-blue-500 hover:underline">Sign In</Link></p>
         </div>
     );
 };

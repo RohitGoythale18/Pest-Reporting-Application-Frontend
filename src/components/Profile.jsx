@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const Profile = ({ setIsAuthenticated }) => {
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -31,6 +32,8 @@ const Profile = ({ setIsAuthenticated }) => {
     }
 
     const handleLogout = () => {
+        setIsLoading(true);
+
         localStorage.removeItem("userId");
         localStorage.removeItem("token");
         localStorage.removeItem("isAuthenticated");
@@ -52,7 +55,7 @@ const Profile = ({ setIsAuthenticated }) => {
                     onClick={handleLogout}
                     className="bg-blue-500 text-white py-2 px-5 rounded-md"
                 >
-                    Logout
+                    {isLoading ? "Logging Out..." : "Logout"}
                 </button>
             </div>
         </div>

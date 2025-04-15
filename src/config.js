@@ -1,0 +1,1 @@
+export const API_BASE_URL = "https://pest-reporting-application-backend.onrender.com/pest-report";

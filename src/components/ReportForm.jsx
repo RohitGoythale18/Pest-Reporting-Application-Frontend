@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../config";
 
 const ReportForm = () => {
     const [location, setLocation] = useState("");
@@ -30,7 +31,7 @@ const ReportForm = () => {
 
         try {
             const response = await axios.post(
-                "https://pest-reporting-application-backend.onrender.com/pest-report/submit",
+                `${API_BASE_URL}/submit`,
                 formData,
                 {
                     headers: {

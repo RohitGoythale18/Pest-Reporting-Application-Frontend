@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "../config";
 
 const Login = ({ setIsAuthenticated }) => {
     const [email, setEmail] = useState("");
@@ -12,7 +13,8 @@ const Login = ({ setIsAuthenticated }) => {
         e.preventDefault();
         setIsLoading(true);
         try {
-            const res = await axios.post("https://pest-reporting-application-backend.onrender.com/pest-report/login",
+            const res = await axios.post(
+                `${API_BASE_URL}/login`,
                 { email, password },
                 { headers: { "Content-Type": "application/json" } }
             );

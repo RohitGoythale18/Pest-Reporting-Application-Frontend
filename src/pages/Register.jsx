@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "../config";
 
 const Register = () => {
     const [username, setUsername] = useState("");
@@ -32,7 +33,10 @@ const Register = () => {
         setIsLoading(true);
 
         try {
-            await axios.post("https://pest-reporting-application-backend.onrender.com/pest-report/register", { username, email, phone, password });
+            await axios.post(
+                `${API_BASE_URL}/register`,
+                { username, email, phone, password }
+            );
             navigate("/login");
         } catch (error) {
             alert("Registration failed");

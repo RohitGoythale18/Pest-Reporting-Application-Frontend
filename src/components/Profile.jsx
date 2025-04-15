@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
 
 const Profile = ({ setIsAuthenticated }) => {
     const [user, setUser] = useState(null);
@@ -13,7 +14,7 @@ const Profile = ({ setIsAuthenticated }) => {
                 const userId = localStorage.getItem("userId");
                 const token = localStorage.getItem("token");
                 
-                const response = await axios.get(`https://pest-reporting-application-backend.onrender.com/pest-report/profile/${userId}`, {
+                const response = await axios.get(`${API_BASE_URL}/profile/${userId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 

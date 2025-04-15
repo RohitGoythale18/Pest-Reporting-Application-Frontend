@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { API_BASE_URL } from '../config';
 
 const Home = () => {
     const [reports, setReports] = useState([]);
@@ -14,9 +15,11 @@ const Home = () => {
                     return;
                 }
 
-                const response = await axios.get("https://pest-reporting-application-backend.onrender.com/pest-report/reports", {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
+                const response = await axios.get(
+                    `${API_BASE_URL}/reports`,
+                    {
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
 
                 setReports(response.data);
             } catch (error) {

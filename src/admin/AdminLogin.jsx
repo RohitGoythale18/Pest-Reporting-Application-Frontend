@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { API_BASE_URL } from "../config";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
+import axios from 'axios';
 
-const Login = ({ setIsAuthenticated, heading }) => {
+const AdminLogin = ({heading}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -14,17 +14,17 @@ const Login = ({ setIsAuthenticated, heading }) => {
         setIsLoading(true);
         try {
             const res = await axios.post(
-                `${API_BASE_URL}/login`,
+                `${API_BASE_URL}/admin/login`,
                 { email, password },
                 { headers: { "Content-Type": "application/json" } }
             );
 
-            if (res.data && res.data.token && res.data.user) {
+            if (res.data && res.data.token && res.data.admin) {
                 localStorage.setItem("token", res.data.token);
-                localStorage.setItem("userId", res.data.user.id);
+                localStorage.setItem("userId", res.data.admin.id);
 
                 setIsAuthenticated(true);
-                navigate("/");
+                navigate("/admin/dashboard");
             } else {
                 throw new Error("Invalid response from server");
             }
@@ -62,12 +62,12 @@ const Login = ({ setIsAuthenticated, heading }) => {
 
             <p className="mt-4 text-md text-gray-600 text-center">
                 Don't have an account?{" "}
-                <Link to="/register" className="text-blue-500 hover:underline">
+                <Link to="/admin/register" className="text-blue-500 hover:underline">
                     Sign Up
                 </Link>
             </p>
         </div>
-    );
-};
+    )
+}
 
-export default Login;
+export default AdminLogin;

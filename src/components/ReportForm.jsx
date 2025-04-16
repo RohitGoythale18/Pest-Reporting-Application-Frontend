@@ -27,7 +27,7 @@ const ReportForm = () => {
             formData.append("image", image);
         }
 
-        console.log("Submitting Data:", Object.fromEntries(formData.entries()));
+        // console.log("Submitting Data:", Object.fromEntries(formData.entries()));
 
         try {
             const response = await axios.post(
@@ -77,6 +77,10 @@ const ReportForm = () => {
                     <option value="Rats">Rats</option>
                     <option value="Cockroaches">Cockroaches</option>
                     <option value="Termites">Termites</option>
+                    <option value="Termites">Mosquitoes</option>
+                    <option value="Termites">Spiders</option>
+                    <option value="Termites">Ants</option>
+                    <option value="Termites">Moths</option>
                 </select>
                 <textarea
                     value={description}

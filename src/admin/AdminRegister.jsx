@@ -1,15 +1,15 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { API_BASE_URL } from "../config";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { API_BASE_URL } from '../config';
 
-const Register = ({heading}) => {
-    const [username, setUsername] = useState("");
+const AdminRegister = ({ heading }) => {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -26,20 +26,24 @@ const Register = ({heading}) => {
             return;
         }
         if (password.length < 8) {
-            setError("Password must be at least 8 characters long.");
+            alert("Password must be at least 8 characters long.");
             return;
         }
 
         setIsLoading(true);
 
         try {
-            await axios.post(
-                `${API_BASE_URL}/register`,
-                { username, email, phone, password }
-            );
-            navigate("/login");
+            await axios.post(`${API_BASE_URL}/admin/register`, {
+                name,
+                email,
+                phone,
+                password
+            });
+
+            navigate("/admin/login");
         } catch (error) {
-            alert("Registration failed");
+            console.error(error);
+            alert("Registration failed. Please check console for more info.");
         } finally {
             setIsLoading(false);
         }
@@ -51,9 +55,9 @@ const Register = ({heading}) => {
             <form onSubmit={handleRegister}>
                 <input
                     type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Username"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Name"
                     className="border p-2 w-full mb-2"
                     required
                 />
@@ -89,8 +93,11 @@ const Register = ({heading}) => {
                 </button>
             </form>
 
-            <p className="mt-4 text-md text-gray-600 text-center">Already have an account? <Link to="/login" className="text-blue-500 hover:underline">Sign In</Link></p>
+            <p className="mt-4 text-md text-gray-600 text-center">
+                Already have an account? <Link to="/admin/login" className="text-blue-500 hover:underline">Sign In</Link>
+            </p>
         </div>
     );
 };
-export default Register;
+
+export default AdminRegister;

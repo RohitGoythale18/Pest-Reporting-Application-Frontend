@@ -7,13 +7,13 @@ import { Link, useLocation } from 'react-router-dom';
 const menuItems = [
   { label: 'Dashboard', icon: <BiHome className='size-5' />, path: '/admin/dashboard' },
   { label: 'New Reports', icon: <FiFilePlus className='size-5' />, path: '/admin/new-reports' },
-  { label: 'Active Cases', icon: <BiBug className='size-5' />, path: '/admin/active-cases' },
-  { label: 'Resolved Cases', icon: <BiCheckCircle className='size-5' />, path: '/admin/resolved-cases' },
-  { label: 'Assign Technician', icon: <BiUserCheck className='size-5' />, path: '/admin/assign-tech' },
-  { label: 'Map View', icon: <BiMapPin className='size-5' />, path: '/admin/map' },
-  { label: 'Analytics', icon: <BiBarChartAlt2 className='size-5' />, path: '/admin/analytics' },
-  { label: 'User Management', icon: <FaUserSecret className='size-5' />, path: '/admin/users' },
-  { label: 'Settings', icon: <FiSettings className='size-5' />, path: '/admin/settings' },
+  // { label: 'Active Cases', icon: <BiBug className='size-5' />, path: '/admin/active-cases' },
+  // { label: 'Resolved Cases', icon: <BiCheckCircle className='size-5' />, path: '/admin/resolved-cases' },
+  // { label: 'Assign Technician', icon: <BiUserCheck className='size-5' />, path: '/admin/assign-tech' },
+  // { label: 'Map View', icon: <BiMapPin className='size-5' />, path: '/admin/map' },
+  // { label: 'Analytics', icon: <BiBarChartAlt2 className='size-5' />, path: '/admin/analytics' },
+  // { label: 'User Management', icon: <FaUserSecret className='size-5' />, path: '/admin/users' },
+  // { label: 'Settings', icon: <FiSettings className='size-5' />, path: '/admin/settings' },
 ];
 
 const AdminSidebar = () => {

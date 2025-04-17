@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL } from "../auth/config";
 
 const ReportForm = () => {
     const [location, setLocation] = useState("");

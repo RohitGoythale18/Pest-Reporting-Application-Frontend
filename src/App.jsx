@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "./config";
 
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";

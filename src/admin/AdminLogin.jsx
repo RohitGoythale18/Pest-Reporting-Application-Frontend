@@ -19,9 +19,11 @@ const AdminLogin = ({heading}) => {
                 { headers: { "Content-Type": "application/json" } }
             );
 
+            console.log(res.data);
+
             if (res.data && res.data.token && res.data.admin) {
                 localStorage.setItem("token", res.data.token);
-                localStorage.setItem("userId", res.data.admin.id);
+                localStorage.setItem("adminId", res.data.admin.id);
 
                 setIsAuthenticated(true);
                 navigate("/admin/dashboard");

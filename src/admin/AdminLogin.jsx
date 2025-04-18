@@ -1,37 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../auth/config';
 
-const AdminLogin = ({heading}) => {
+const AdminLogin = ({ setIsAuthenticated, heading }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setError("");
         setIsLoading(true);
+
         try {
             const res = await axios.post(
-                `${API_BASE_URL}/admin/login`,
+                `${API_BASE_URL}/admin/login-admin`,
                 { email, password },
                 { headers: { "Content-Type": "application/json" } }
             );
+            console.log("Login response:", res.data);
 
-            console.log(res.data);
+            const { admin, token, message } = res.data;
 
-            if (res.data && res.data.token && res.data.admin) {
-                localStorage.setItem("token", res.data.token);
-                localStorage.setItem("adminId", res.data.admin.id);
-
-                setIsAuthenticated(true);
-                navigate("/admin/dashboard");
-            } else {
-                throw new Error("Invalid response from server");
+            if (!admin?.id || !token) {
+                setError(message || "Invalid email or password.");
+                setIsLoading(false); 
+                return;
             }
+
+            localStorage.setItem("adminId", admin.id);
+            localStorage.setItem("role", admin.role);
+            localStorage.setItem("token", token);
+            setIsAuthenticated(true);
+
+            console.log("Navigate to /admin/dashboard");
+            navigate("/admin/dashboard");
         } catch (error) {
             alert("Invalid credentials");
+            console.error("Login error:", error);
         } finally {
             setIsLoading(false);
         }
@@ -69,7 +78,7 @@ const AdminLogin = ({heading}) => {
                 </Link>
             </p>
         </div>
-    )
-}
+    );
+};
 
 export default AdminLogin;

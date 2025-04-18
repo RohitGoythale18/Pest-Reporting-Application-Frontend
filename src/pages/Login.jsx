@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL } from "../auth/config";
 
+
 const Login = ({ setIsAuthenticated, heading }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -14,14 +15,14 @@ const Login = ({ setIsAuthenticated, heading }) => {
         setIsLoading(true);
         try {
             const res = await axios.post(
-                `${API_BASE_URL}/login`,
+                `${API_BASE_URL}/login-user`,
                 { email, password },
                 { headers: { "Content-Type": "application/json" } }
             );
 
             if (res.data && res.data.token && res.data.user) {
-                localStorage.setItem("token", res.data.token);
                 localStorage.setItem("userId", res.data.user.id);
+                localStorage.setItem("token", res.data.token);
 
                 setIsAuthenticated(true);
                 navigate("/");

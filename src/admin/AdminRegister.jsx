@@ -40,7 +40,7 @@ const AdminRegister = ({ heading }) => {
                 password
             });
 
-            navigate("/admin/login");
+            navigate("/admin/login-admin");
         } catch (error) {
             console.error(error);
             alert("Registration failed. Please check console for more info.");
@@ -94,7 +94,7 @@ const AdminRegister = ({ heading }) => {
             </form>
 
             <p className="mt-4 text-md text-gray-600 text-center">
-                Already have an account? <Link to="/admin/login" className="text-blue-500 hover:underline">Sign In</Link>
+                Already have an account? <Link to="/admin/login-admin" className="text-blue-500 hover:underline">Sign In</Link>
             </p>
         </div>
     );
